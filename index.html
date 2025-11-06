@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dominion Marketing — Premier Growth & SEO Agency</title>
+    <meta name="description" content="Dominion Marketing is a premier digital agency specializing in SEO, high-converting websites, and performance ads to deliver measurable, scalable growth for ambitious brands." />
+    <!-- Load fonts with all weights needed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <!-- Removed Tailwind CDN - using PostCSS plugin instead -->
+    <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.24.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.545.0",
+    "three": "https://aistudiocdn.com/three@^0.168.0",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^3.3.1"
+  }
+}
+</script>
+<style>
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-up {
+    opacity: 0;
+    animation: fade-up 0.6s ease-out forwards;
+  }
+  .section-hidden {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .section-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @keyframes shimmer {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(200%); }
+  }
+  .animate-shimmer {
+      animation-name: shimmer;
+  }
+  @keyframes drift {
+    from { transform: translateY(40px); opacity: 0; }
+    50% { opacity: 0.7; }
+    to { transform: translateY(-40px); opacity: 0; }
+  }
+  .animate-drift {
+    animation-name: drift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes bottom-line-shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 100% 0; }
+  }
+  @keyframes halo-glow {
+    0% {
+      box-shadow: 0 0 25px -5px rgba(255, 215, 0, 0.2), 0 0 45px -15px rgba(255, 215, 0, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 40px 0px rgba(255, 215, 0, 0.35), 0 0 60px -10px rgba(255, 215, 0, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 25px -5px rgba(255, 215, 0, 0.2), 0 0 45px -15px rgba(255, 215, 0, 0.1);
+    }
+  }
+  .animate-halo-glow {
+      animation: halo-glow 5s ease-in-out infinite;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  .animate-ticker {
+    animation: ticker 40s linear infinite;
+  }
+  .pause-on-hover:hover .animate-ticker {
+    animation-play-state: paused;
+  }
+  .mask-gradient {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+</style>
+<link rel="stylesheet" href="/index.css">
+  </head>
+  <body class="antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

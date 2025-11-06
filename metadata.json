@@ -1,0 +1,5 @@
+{
+  "name": "Dominion Marketing AI Growth Planner",
+  "description": "An AI-powered web application for Dominion Marketing that provides an instant analysis of a business's online presence, offering a score and actionable feedback using the Gemini API.",
+  "requestFramePermissions": []
+}
