@@ -202,7 +202,9 @@ const PlanCard = ({ plan, billingCycle }) => {
     <div
       className={`relative rounded-[2rem] p-8 backdrop-blur-lg transition-all duration-300 h-full flex flex-col hover:scale-105 overflow-visible ${isFeatured ? "bg-white/10 border border-[#FFD700]/50" : "bg-white/5 border border-white/20 hover:border-[#FFD700]/30 hover:shadow-[inset_0_0_20px_rgba(255,255,255,0.05)]"}`}
     >
-      {isFeatured && <div className="absolute inset-0 rounded-[2rem] animate-halo-glow -z-10"></div>}
+      {isFeatured && (
+        <div className="absolute inset-0 rounded-[2rem] animate-halo-glow -z-10 pointer-events-none"></div>
+      )}
       {content}
     </div>
   )
@@ -248,7 +250,7 @@ export const Pricing: React.FC = () => {
             >
               {plan.tier === "growth" && (
                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-10">
-                  <div className="px-5 py-2 rounded-full bg-gradient-to-r from-[#FFD700] via-[#FFD84D] to-[#FFA500] shadow-[0_0_12px_rgba(255,200,0,0.4),0_4px_15px_rgba(0,0,0,0.3)] transition-transform duration-250 hover:scale-105">
+                  <div className="px-5 py-2 rounded-full bg-gradient-to-r from-[#FFD700] via-[#FFD84D] to-[#FFA500] shadow-[0_0_12px_rgba(255,200,0,0.4),0_4px_15px_rgba(0,0,0,0.3)] transition-transform duration-250 hover:scale-105 animate-badge-slide-in">
                     <span className="text-[#111] font-semibold text-[0.85rem] whitespace-nowrap">
                       ⭐ Most Popular — Best for Local Businesses
                     </span>

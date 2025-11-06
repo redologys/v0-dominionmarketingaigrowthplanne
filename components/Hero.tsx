@@ -55,10 +55,10 @@ export const Hero: React.FC = () => {
           <div className="mt-8 flex items-center justify-center animate-fade-up" style={{ animationDelay: "0.4s" }}>
             <a
               href="#score"
-              className="inline-flex items-center gap-3 rounded-xl bg-[#FFD700] px-8 py-4 text-lg font-semibold text-gray-900 shadow-[0_0_15px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:bg-amber-300 hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1221]"
+              className="inline-flex items-center gap-3 rounded-xl bg-[#FFD700] px-8 py-4 text-lg font-semibold text-gray-900 shadow-[0_0_15px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:bg-amber-300 hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1221] group"
             >
-              <Icons.Zap className="h-5 w-5" />
-              Get My Free Growth Analysis
+              <Icons.Zap className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              <span className="transition-colors duration-300 delay-50">Reveal My Growth Potential</span>
             </a>
           </div>
         </div>

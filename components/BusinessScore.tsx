@@ -531,14 +531,16 @@ export const BusinessScore: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="inline-flex items-center gap-2 rounded-md bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-2.5 hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_10px_rgba(255,215,0,0.4)] hover:shadow-[0_0_20px_rgba(255,215,0,0.6)]"
+                    className="inline-flex items-center gap-2 rounded-md bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-2.5 hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_10px_rgba(255,215,0,0.4)] hover:shadow-[0_0_20px_rgba(255,215,0,0.6)] group"
                   >
                     {isLoading ? (
                       <Icons.LoaderCircle className="w-4 h-4 animate-spin" />
                     ) : (
-                      <Icons.Sparkles className="w-4 h-4" />
+                      <Icons.Sparkles className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
                     )}
-                    {isLoading ? "Analyzing..." : "Analyze My Business"}
+                    <span className="transition-colors duration-300 delay-50">
+                      {isLoading ? "Analyzing..." : "Run Smart Audit"}
+                    </span>
                   </button>
                 </div>
                 {error && <p className="text-sm text-red-400 font-medium">{error}</p>}

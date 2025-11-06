@@ -172,10 +172,12 @@ export const AboutContact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-3 hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition-all transform-gpu hover:-translate-y-0.5 shadow-[0_0_15px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-3 hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition-all transform-gpu hover:-translate-y-0.5 shadow-[0_0_15px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
                   >
-                    <Icons.Send className="w-4 h-4" />
-                    {isSubmitting ? "Submitting..." : "Request My Growth Plan"}
+                    <Icons.Send className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <span className="transition-colors duration-300 delay-50">
+                      {isSubmitting ? "Submitting..." : "Design My Growth Path"}
+                    </span>
                   </button>
                   <p className="text-center text-sm text-gray-500">
                     Or email us directly at{" "}
