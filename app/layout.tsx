@@ -17,7 +17,7 @@ export const metadata = {
   title: "Dominion Marketing - AI-Powered Growth Planning",
   description: "Transform your business with data-driven insights and strategic AI-powered growth planning",
   icons: {
-    icon: "/icon.svg",
+    icon: "/icon.png",
   },
   generator: "v0.app",
 }
