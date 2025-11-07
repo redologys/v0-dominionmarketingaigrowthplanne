@@ -37,6 +37,8 @@ const plans = [
     features: [
       { text: "Advanced Website Design (custom UI + SEO optimization)", isAI: false },
       { text: "Social Media Management & Content Scheduling", isAI: false },
+      { text: "CRM Integration & Custom Dashboards", isAI: false },
+      { text: "Conversion-Focused Strategy Sessions", isAI: false },
       {
         text: "Exclusive Market Insights Dashboard",
         isAI: true,
@@ -47,8 +49,6 @@ const plans = [
         isAI: true,
         tooltip: "AI-powered ad copy generation optimized for conversions",
       },
-      { text: "CRM Integration & Custom Dashboards", isAI: false },
-      { text: "Conversion-Focused Strategy Sessions", isAI: false },
     ],
     ctaText: "Start Local Growth Plan",
   },
@@ -64,6 +64,9 @@ const plans = [
     customNote: "Tailored partnership built around your growth goals.",
     features: [
       { text: "Dedicated Account Manager", isAI: false },
+      { text: "Full Multi-Channel Campaigns", isAI: false },
+      { text: "Custom API & CRM Integrations", isAI: false },
+      { text: "End-to-End Automation Setup", isAI: false },
       {
         text: "Private Market Intelligence Suite",
         isAI: true,
@@ -74,9 +77,6 @@ const plans = [
         isAI: true,
         tooltip: "Personalized performance reports with strategic recommendations",
       },
-      { text: "Full Multi-Channel Campaigns", isAI: false },
-      { text: "Custom API & CRM Integrations", isAI: false },
-      { text: "End-to-End Automation Setup", isAI: false },
     ],
     ctaText: "Book Strategy Call",
   },
