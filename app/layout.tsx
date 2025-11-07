@@ -16,7 +16,10 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: "Dominion Marketing - AI-Powered Growth Planning",
   description: "Transform your business with data-driven insights and strategic AI-powered growth planning",
-    generator: 'v0.app'
+  icons: {
+    icon: "/icon.svg",
+  },
+  generator: "v0.app",
 }
 
 export default function RootLayout({
