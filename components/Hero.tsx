@@ -7,17 +7,86 @@ export const Hero: React.FC = () => {
   return (
     <>
       <style>{`
-        .light-sweep {
-          position: relative;
+        .dynamic-word {
+          background: linear-gradient(90deg, #FFD95A, #FFEAA7, #FFD95A);
+          background-size: 200%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          background-image: linear-gradient(90deg, #FFD700, #FFFFFF, #FFD700);
-          background-size: 200% 100%;
-          animation: light-sweep-anim 10s linear infinite;
+          animation:
+            shimmer 8s linear infinite,
+            goldGlow 5s ease-in-out infinite;
+          text-shadow: 0 0 10px rgba(255, 217, 90, 0.35);
         }
-        @keyframes light-sweep-anim {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+
+        @keyframes shimmer {
+          0% { background-position: 200% center; }
+          100% { background-position: -200% center; }
+        }
+
+        @keyframes goldGlow {
+          0%, 100% {
+            text-shadow: 0 0 8px rgba(255, 217, 90, 0.3),
+                         0 0 20px rgba(255, 217, 90, 0.15);
+          }
+          50% {
+            text-shadow: 0 0 25px rgba(255, 217, 90, 0.8),
+                         0 0 40px rgba(255, 217, 90, 0.4);
+          }
+        }
+
+        /* Added premium CTA button animations: breathing glow and shimmer sweep */
+        .cta-btn {
+          position: relative;
+          background: linear-gradient(90deg, #FFD95A, #FFEAA7);
+          color: #0D0F13;
+          font-weight: 600;
+          padding: 1rem 2.5rem;
+          border-radius: 12px;
+          box-shadow: 0 0 15px rgba(255, 217, 90, 0.4);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          cursor: pointer;
+          animation: buttonGlow 5s ease-in-out infinite;
+        }
+
+        /* Shimmer sweep effect */
+        .cta-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(120deg, transparent, rgba(255,215,90,0.25), transparent);
+          transform: translateX(-100%);
+          animation: shimmerSweep 4.5s linear infinite;
+        }
+
+        @keyframes shimmerSweep {
+          100% { transform: translateX(100%); }
+        }
+
+        /* Breathing gold aura */
+        @keyframes buttonGlow {
+          0%, 100% {
+            box-shadow: 0 0 18px rgba(255, 217, 90, 0.3),
+                        0 0 35px rgba(255, 217, 90, 0.1);
+          }
+          50% {
+            box-shadow: 0 0 35px rgba(255, 217, 90, 0.7),
+                        0 0 65px rgba(255, 217, 90, 0.3);
+          }
+        }
+
+        .cta-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 0 40px rgba(255, 217, 90, 0.7),
+                      0 0 80px rgba(255, 217, 90, 0.3);
+        }
+
+        .cta-btn .icon {
+          transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover .icon {
+          transform: scale(1.1);
         }
       `}</style>
       {/* Hero Content Section */}
@@ -41,7 +110,7 @@ export const Hero: React.FC = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           <h1 className="animate-fade-up max-w-5xl mx-auto text-5xl sm:text-6xl md:text-7xl font-bold text-white font-sans tracking-[-0.02em] leading-[1.1]">
-            Ready to <span className="font-serif italic light-sweep">dominate</span> your market — not just compete?
+            Ready to <span className="font-serif italic dynamic-word">dominate</span> your market — not just compete?
           </h1>
 
           <p
@@ -55,10 +124,10 @@ export const Hero: React.FC = () => {
           <div className="mt-8 flex items-center justify-center animate-fade-up" style={{ animationDelay: "0.4s" }}>
             <a
               href="#score"
-              className="inline-flex items-center gap-3 rounded-xl bg-[#FFD700] px-8 py-4 text-lg font-semibold text-gray-900 shadow-[0_0_15px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:bg-amber-300 hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1221] group"
+              className="cta-btn inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1221]"
             >
-              <Icons.Zap className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-              <span className="transition-colors duration-300 delay-50">Reveal My Growth Potential</span>
+              <Icons.Zap className="icon h-5 w-5" />
+              <span>Reveal My Growth Potential</span>
             </a>
           </div>
         </div>
