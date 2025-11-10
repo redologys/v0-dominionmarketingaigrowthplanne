@@ -79,7 +79,7 @@ export const DominionAIAssistant = () => {
       } else if (suggestionText === "Talk to a Real Expert" || suggestionText === "Get a Free Audit") {
         response = "Perfect! I'll redirect you to book a strategy call with our team."
         setTimeout(() => {
-          window.open("https://cal.com/red-2pcxh4/free-growth-call", "_blank")
+          window.open("https://cal.com/dominionmarketing/free-growth-eval", "_blank")
         }, 500)
       }
       setMessages((prev) => [...prev, { type: "bot", text: response }])

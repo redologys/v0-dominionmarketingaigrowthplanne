@@ -88,7 +88,7 @@ export const AboutContact: React.FC = () => {
     }
   }
 
-  const calUrl = `https://cal.com/red-2pcxh4/free-growth-call?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}`
+  const calUrl = `https://cal.com/dominionmarketing/free-growth-eval?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}`
 
   return (
     <section id="about" className="pt-24 pb-24 px-6 sm:px-8 lg:px-12">
@@ -212,7 +212,7 @@ export const AboutContact: React.FC = () => {
                   <p className="mt-4 text-center text-sm text-gray-400">
                     If you can't see the calendar,{" "}
                     <a
-                      href="https://cal.com/red-2pcxh4/free-growth-call"
+                      href="https://cal.com/dominionmarketing/free-growth-eval"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#FFD700] hover:underline"
