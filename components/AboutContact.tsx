@@ -182,10 +182,10 @@ export const AboutContact: React.FC = () => {
                   <p className="text-center text-sm text-gray-500">
                     Or email us directly at{" "}
                     <a
-                      href="mailto:hello@dominion.marketing"
+                      href="mailto:dominionmarketing1s@gmail.com"
                       className="text-gray-400 hover:text-[#FFD700] underline underline-offset-2"
                     >
-                      hello@dominion.marketing
+                      dominionmarketing1s@gmail.com
                     </a>
                   </p>
                 </form>
