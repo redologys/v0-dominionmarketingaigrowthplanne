@@ -7,24 +7,25 @@ import { AnimatedHeadline } from "./AnimatedHeadline"
 
 const highlights = [
   {
-    icon: <Icons.Target className="w-4.5 h-4.5" />,
+    icon: <Icons.Target className="w-5 h-5" />,
     title: "Strategy First",
-    description: "No fluff—everything ties back to pipeline.",
+    description:
+      "Every decision starts with your goals — no fluff, just a direct line from marketing to measurable pipeline results.",
   },
   {
-    icon: <Icons.TrendingUp className="w-4.5 h-4.5" />,
+    icon: <Icons.TrendingUp className="w-5 h-5" />,
     title: "Data-Driven Growth",
-    description: "Weekly iterations and clear milestones.",
+    description: "AI insights + weekly iterations ensure your campaigns adapt faster than your competitors.",
   },
   {
-    icon: <Icons.BarChart3 className="w-4.5 h-4.5" />,
+    icon: <Icons.BarChart3 className="w-5 h-5" />,
     title: "Clear Analytics",
-    description: "Transparent reporting on what moves the needle.",
+    description: "Track what matters with live dashboards and transparent reporting — no more marketing black boxes.",
   },
   {
-    icon: <Icons.Handshake className="w-4.5 h-4.5" />,
+    icon: <Icons.Handshake className="w-5 h-5" />,
     title: "Dedicated Support",
-    description: "Your goals are our goals. We're in this together.",
+    description: "A team that thinks like a partner, not a vendor — your wins are our KPIs.",
   },
 ]
 
@@ -96,24 +97,36 @@ export const AboutContact: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Column: About & Highlights */}
           <div>
-            <AnimatedHeadline text="Your partner in measurable growth" />
+            <AnimatedHeadline text="Your partner in predictable, measurable growth" />
             <p className="mt-4 text-lg text-gray-300 leading-relaxed">
-              Partner with purpose—scale your impact through data-driven growth. We combine technical SEO,
-              conversion-first design, and clear reporting so you know exactly what's working.
+              We help ambitious businesses attract more customers and turn their websites into predictable revenue
+              engines. Our strategies cut through the noise — built on real data, clear goals, and the kind of
+              accountability most agencies only promise.
             </p>
             <div className="mt-8 grid sm:grid-cols-2 gap-6">
               {highlights.map((highlight, index) => (
                 <div
                   key={index}
-                  className="rounded-xl border border-white/10 p-5 bg-white/5 transition-all duration-300 hover:shadow-[inset_0_1px_2px_rgba(11,18,33,0.9),0_0_15px_rgba(255,215,0,0.3)] hover:-translate-y-1"
+                  className="group relative rounded-xl border border-white/10 p-6 bg-gradient-to-br from-white/5 to-white/[0.02] transition-all duration-500 hover:border-[#FFD700]/30 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(255,215,0,0.15)] overflow-hidden"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 flex-shrink-0 rounded-lg bg-[#FFD700]/10 text-[#FFD700] grid place-content-center">
-                      {highlight.icon}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-xl" />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="h-10 w-10 flex-shrink-0 rounded-lg bg-[#FFD700]/10 text-[#FFD700] grid place-content-center transition-all duration-500 group-hover:bg-[#FFD700]/20 group-hover:-translate-y-1 group-hover:shadow-[0_0_15px_rgba(255,215,0,0.4)]">
+                        {highlight.icon}
+                      </div>
+                      <div className="relative">
+                        <div className="text-base font-semibold text-white transition-all duration-300 group-hover:text-[#FFEAA7]">
+                          {highlight.title}
+                        </div>
+                        <div className="absolute -bottom-0.5 left-0 h-[2px] w-0 bg-gradient-to-r from-[#FFD700] to-[#FFEAA7] transition-all duration-500 group-hover:w-full" />
+                      </div>
                     </div>
-                    <div className="text-base font-semibold text-white">{highlight.title}</div>
+                    <p className="text-sm text-gray-400 leading-relaxed transition-all duration-300 group-hover:text-gray-300 group-hover:brightness-110">
+                      {highlight.description}
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm text-gray-400">{highlight.description}</p>
                 </div>
               ))}
             </div>
