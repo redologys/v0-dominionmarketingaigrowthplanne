@@ -168,6 +168,94 @@
     transition-delay: 0.05s;
   }
 
+  /* Added icon hover animations for competitor report cards */
+  /* Gold Pulse - For magnifying glass icon (Visibility Score) */
+  @keyframes goldPulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+      filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0.5));
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.9;
+      filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
+    }
+  }
+
+  /* Data Rise - For bar chart icon (Missed Revenue) */
+  @keyframes dataRise {
+    0% {
+      transform: translateY(3px);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Flash Flicker - For lightning bolt icon (Quick Wins) */
+  @keyframes flashFlicker {
+    0%,
+    100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 0 rgba(255, 215, 0, 0));
+    }
+    25%,
+    75% {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+    }
+    50% {
+      opacity: 0.7;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    }
+  }
+
+  /* Shimmer sweep for header button */
+  @keyframes shimmerSweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+
+  .group:hover .icon-search {
+    animation: goldPulse 1.8s ease-in-out infinite;
+  }
+
+  .group:hover .icon-bar {
+    animation: dataRise 0.8s ease-in-out;
+  }
+
+  .group:hover .icon-flash {
+    animation: flashFlicker 1.2s linear;
+  }
+
+  .shimmer-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-effect::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmerSweep 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
   /* Added premium pricing card animations for Most Popular badge and glow */
   @keyframes badge-slide-in {
     from {

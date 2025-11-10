@@ -98,7 +98,7 @@ export const Header: React.FC = () => {
               <a
                 href="#score"
                 onClick={(e) => handleLinkClick(e, "#score")}
-                className="inline-flex items-center gap-1.5 sm:gap-2 rounded-md bg-[#FFD700] text-gray-900 text-sm sm:text-base font-semibold px-3 sm:px-4 py-2 sm:py-2.5 shadow-[0_0_10px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition-all transform-gpu hover:-translate-y-0.5 whitespace-nowrap"
+                className="shimmer-effect inline-flex items-center gap-1.5 sm:gap-2 rounded-md bg-[#FFD700] text-gray-900 text-sm sm:text-base font-semibold px-3 sm:px-4 py-2 sm:py-2.5 shadow-[0_0_10px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition-all transform-gpu hover:-translate-y-0.5 whitespace-nowrap"
               >
                 <Icons.Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="hidden xs:inline">Get a Growth Plan</span>
@@ -192,7 +192,7 @@ export const Header: React.FC = () => {
                 <a
                   href="#score"
                   onClick={(e) => handleLinkClick(e, "#score")}
-                  className="flex items-center justify-center gap-2 w-full rounded-md bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-3 shadow-[0_0_10px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] hover:bg-amber-300 transition-all"
+                  className="shimmer-effect flex items-center justify-center gap-2 w-full rounded-md bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-3 shadow-[0_0_10px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] hover:bg-amber-300 transition-all"
                 >
                   <Icons.Sparkles className="w-4 h-4" />
                   Get a Growth Plan
