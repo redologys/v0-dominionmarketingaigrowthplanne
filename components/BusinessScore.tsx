@@ -34,7 +34,7 @@ const LoadingBars = () => {
 
 const getBusinessScore = async (
   businessName: string,
-  mode: "website" | "social",
+  mode: "website" | "social" | "business",
   websiteURL?: string,
   socialHandles?: { instagram?: string; tiktok?: string; facebook?: string; linkedin?: string },
 ) => {
@@ -277,7 +277,15 @@ export const BusinessScore: React.FC = () => {
       setResult(null)
 
       try {
-        const mode = noWebsite ? "social" : "website"
+        let mode: "website" | "social" | "business"
+        if (!noWebsite && websiteUrl) {
+          mode = "website"
+        } else if (noWebsite && (instagram || tiktok || facebook || linkedin)) {
+          mode = "social"
+        } else {
+          mode = "business"
+        }
+
         const scoreResult = await getBusinessScore(
           businessName,
           mode,
@@ -407,8 +415,8 @@ export const BusinessScore: React.FC = () => {
                 <AnimatedHeadline text="How strong is your online presence?" />
               </div>
               <p className="mt-3 text-lg text-gray-300 font-sans">
-                Get an instant presence estimate. Enter your business name and{" "}
-                {noWebsite ? "social media handles" : "website"} to see your AI-generated score, plus quick wins to get
+                Get an instant presence estimate. Enter your business name {!noWebsite && "and website"}
+                {noWebsite && "(optionally add social media)"} to see your AI-generated score, plus quick wins to get
                 more customers.
               </p>
               <p className="mt-2 text-sm text-gray-400 font-sans italic">
@@ -440,34 +448,30 @@ export const BusinessScore: React.FC = () => {
                     className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#FFD700] focus:ring-[#FFD700] focus:ring-offset-0"
                   />
                   <label htmlFor="noWebsite" className="text-sm text-gray-300">
-                    I don't have a website yet
+                    I don't have a website (we'll analyze your online presence)
                   </label>
                 </div>
 
-                {!noWebsite ? (
+                {!noWebsite && (
                   <div>
                     <label htmlFor="websiteUrl" className="block text-base font-medium text-gray-200 mb-1">
-                      Website URL
+                      Website URL <span className="text-gray-400 text-sm">(optional)</span>
                     </label>
-                    <div className="flex items-center gap-2">
-                      <div className="hidden sm:flex items-center justify-center h-11 w-11 rounded-md border border-white/10 bg-white/5 text-gray-200">
-                        <Icons.Globe className="w-4.5 h-4.5" />
-                      </div>
-                      <input
-                        id="websiteUrl"
-                        type="url"
-                        required
-                        placeholder="https://www.example.com"
-                        value={websiteUrl}
-                        onChange={(e) => setWebsiteUrl(e.target.value)}
-                        className="flex-1 rounded-md border border-white/10 bg-white/5 px-3 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#FFD700] focus:border-[#FFD700] transition"
-                      />
-                    </div>
+                    <input
+                      id="websiteUrl"
+                      type="url"
+                      placeholder="e.g., https://example.com"
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                      className="w-full rounded-md border border-white/10 bg-white/5 px-3.5 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#FFD700] focus:border-[#FFD700] transition"
+                    />
                   </div>
-                ) : (
+                )}
+
+                {noWebsite && (
                   <div className="space-y-3">
                     <p className="text-sm text-gray-400 font-sans">
-                      Enter your social media handles (at least one required):
+                      Enter your social media handles (optional - we'll search for your business online):
                     </p>
                     <div className="grid sm:grid-cols-2 gap-3">
                       <div>
@@ -595,14 +599,14 @@ export const BusinessScore: React.FC = () => {
                     }}
                     style={{ background: result ? ringColor(result.overallScore) : "transparent" }}
                   />
-                  <div className="w-40 h-40 rounded-full border-2 border-[#FFD700] flex items-center justify-center relative">
+                  <div className="w-48 h-48 rounded-full border-2 border-[#FFD700] flex items-center justify-center relative">
                     <div className="absolute inset-2 bg-[#0E1425] rounded-full border border-white/10 grid place-content-center">
-                      <div className="text-center">
+                      <div className="text-center px-2">
                         <motion.span
                           initial={{ opacity: 0, scale: 0.5 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
-                          className="text-[4rem] font-bold text-white font-sans"
+                          className="text-5xl font-bold text-white font-sans leading-none"
                         >
                           {result ? animatedScore : "—"}
                         </motion.span>
@@ -611,8 +615,9 @@ export const BusinessScore: React.FC = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.2, duration: 0.4 }}
+                            className="mt-1"
                           >
-                            <p className={`text-sm font-semibold ${scoreFeedback.color} font-sans mt-1`}>
+                            <p className={`text-xs font-semibold ${scoreFeedback.color} font-sans leading-tight`}>
                               {scoreFeedback.tone}
                             </p>
                           </motion.div>

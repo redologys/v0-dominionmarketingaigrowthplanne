@@ -137,6 +137,26 @@ function generateRecommendations(breakdown: any[], mode: string): string[] {
       recommendations.push("Build quality backlinks from reputable industry sources")
       recommendations.push("Monitor Core Web Vitals and maintain fast load times")
     }
+  } else if (mode === "business") {
+    const googleScore = breakdown.find((b) => b.area === "Google Presence")?.score || 0
+    const yelpScore = breakdown.find((b) => b.area === "Review Sites")?.score || 0
+    const localScore = breakdown.find((b) => b.area === "Local Visibility")?.score || 0
+    const websiteScore = breakdown.find((b) => b.area === "Website")?.score || 0
+
+    if (googleScore < 70) {
+      recommendations.push("Claim and optimize your Google Business Profile")
+    }
+    if (yelpScore < 70) {
+      recommendations.push("Create and manage your Yelp business listing")
+    }
+    if (localScore < 70) {
+      recommendations.push("Add your business to local directories and map services")
+    }
+    if (websiteScore < 70) {
+      recommendations.push("Create a professional website to establish credibility")
+    }
+    recommendations.push("Encourage satisfied customers to leave reviews")
+    recommendations.push("Keep your business information consistent across all platforms")
   } else {
     recommendations.push("Post consistently 3-5 times per week across all platforms")
     recommendations.push("Use platform-specific features like Reels, Stories, and TikTok trends")
@@ -148,11 +168,202 @@ function generateRecommendations(breakdown: any[], mode: string): string[] {
   return recommendations.slice(0, 5)
 }
 
+async function analyzeBusinessByName(businessName: string): Promise<any> {
+  try {
+    console.log("[v0] Analyzing business by name:", businessName)
+
+    // Search multiple sources for business presence
+    const [googleResults, yelpResults, localCheck] = await Promise.all([
+      searchGoogleBusiness(businessName),
+      searchYelp(businessName),
+      checkLocalVisibility(businessName),
+    ])
+
+    console.log("[v0] Google results:", googleResults)
+    console.log("[v0] Yelp results:", yelpResults)
+    console.log("[v0] Local check:", localCheck)
+
+    // Calculate scores based on findings
+    const googleScore = googleResults.found ? 85 : 30
+    const yelpScore = yelpResults.found ? 80 : 25
+    const localScore = localCheck.score
+
+    // Check for website from Google results
+    let websiteScore = 50
+    if (googleResults.website) {
+      websiteScore = 90
+    }
+
+    // Calculate overall score
+    const overall = Math.round(googleScore * 0.35 + yelpScore * 0.2 + localScore * 0.2 + websiteScore * 0.25)
+
+    const breakdown = [
+      {
+        area: "Google Presence",
+        score: googleScore,
+        feedback: googleResults.feedback,
+      },
+      {
+        area: "Review Sites",
+        score: yelpScore,
+        feedback: yelpResults.feedback,
+      },
+      {
+        area: "Local Visibility",
+        score: localScore,
+        feedback: localCheck.feedback,
+      },
+      {
+        area: "Website",
+        score: websiteScore,
+        feedback: googleResults.website ? "Website found" : "No website detected",
+      },
+    ]
+
+    const recommendations = [
+      googleScore < 70 ? "Claim and optimize your Google Business Profile" : null,
+      yelpScore < 70 ? "Create and manage your Yelp business listing" : null,
+      localScore < 70 ? "Add your business to local directories and map services" : null,
+      websiteScore < 70 ? "Create a professional website to establish credibility" : null,
+      "Encourage satisfied customers to leave reviews",
+      "Keep your business information consistent across all platforms",
+    ]
+      .filter(Boolean)
+      .slice(0, 5)
+
+    return {
+      businessName,
+      overallScore: overall,
+      label: overall >= 75 ? "Excellent" : overall >= 50 ? "Good" : "Needs Work",
+      breakdown,
+      recommendations,
+      source: "Multi-Source Business Search",
+      foundWebsite: googleResults.website || null,
+    }
+  } catch (err: any) {
+    console.error("[v0] Error analyzing business:", err)
+    throw new Error("Failed to analyze business online presence")
+  }
+}
+
+async function searchGoogleBusiness(businessName: string): Promise<any> {
+  try {
+    const serpApiKey = process.env.SERP_API_KEY
+    if (!serpApiKey) {
+      console.warn("[v0] No SERP API key found, using limited search")
+      return {
+        found: false,
+        feedback: "Limited search capability - add SERP API key for full analysis",
+        website: null,
+      }
+    }
+
+    const url = `https://serpapi.com/search.json?q=${encodeURIComponent(businessName)}&api_key=${serpApiKey}&engine=google&num=10`
+
+    const response = await fetch(url)
+    const data = await response.json()
+
+    console.log("[v0] SERP API response:", JSON.stringify(data).substring(0, 500))
+
+    // Check if business appears in results
+    const hasKnowledgeGraph = data.knowledge_graph !== undefined
+    const hasLocalResults = data.local_results && data.local_results.length > 0
+    const organicResults = data.organic_results || []
+
+    let website = null
+    if (hasKnowledgeGraph && data.knowledge_graph.website) {
+      website = data.knowledge_graph.website
+    } else if (hasLocalResults && data.local_results[0]?.website) {
+      website = data.local_results[0].website
+    } else if (organicResults.length > 0) {
+      website = organicResults[0].link
+    }
+
+    const found = hasKnowledgeGraph || hasLocalResults || organicResults.length > 0
+
+    return {
+      found,
+      website,
+      feedback: hasKnowledgeGraph
+        ? "Prominent Google presence with knowledge panel"
+        : hasLocalResults
+          ? "Found in local search results"
+          : found
+            ? "Appears in search results"
+            : "Limited Google visibility",
+    }
+  } catch (err) {
+    console.error("[v0] Google search error:", err)
+    return {
+      found: false,
+      feedback: "Unable to search Google",
+      website: null,
+    }
+  }
+}
+
+async function searchYelp(businessName: string): Promise<any> {
+  try {
+    const yelpApiKey = process.env.YELP_API_KEY
+    if (!yelpApiKey) {
+      console.warn("[v0] No Yelp API key found")
+      return {
+        found: false,
+        feedback: "Yelp search unavailable",
+      }
+    }
+
+    const url = `https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(businessName)}&limit=5`
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${yelpApiKey}`,
+      },
+    })
+
+    const data = await response.json()
+    console.log("[v0] Yelp response:", JSON.stringify(data).substring(0, 500))
+
+    const found = data.businesses && data.businesses.length > 0
+    const topResult = data.businesses?.[0]
+
+    return {
+      found,
+      feedback: found
+        ? `Found on Yelp${topResult?.rating ? ` with ${topResult.rating} star rating` : ""}`
+        : "Not found on Yelp - claim your listing",
+    }
+  } catch (err) {
+    console.error("[v0] Yelp search error:", err)
+    return {
+      found: false,
+      feedback: "Unable to search Yelp",
+    }
+  }
+}
+
 export default async function handler(req: Request) {
   const { searchParams } = new URL(req.url)
   const url = searchParams.get("url")
   const businessName = searchParams.get("businessName") || "Unknown Business"
   const mode = searchParams.get("mode") || "website"
+
+  console.log("[v0] Check API called with mode:", mode, "businessName:", businessName)
+
+  if (mode === "business") {
+    try {
+      const result = await analyzeBusinessByName(businessName)
+      return new Response(JSON.stringify(result), {
+        headers: { "Content-Type": "application/json" },
+      })
+    } catch (err: any) {
+      console.error("[v0] Business analysis error:", err)
+      return new Response(JSON.stringify({ error: "Failed to analyze business", message: err.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
+  }
 
   if (mode === "social") {
     const instagram = searchParams.get("instagram")
