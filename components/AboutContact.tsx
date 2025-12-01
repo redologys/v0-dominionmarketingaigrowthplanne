@@ -39,6 +39,7 @@ export const AboutContact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({})
+  const [focusedField, setFocusedField] = useState<string | null>(null)
 
   const validateForm = () => {
     const newErrors: { name?: string; email?: string } = {}
@@ -107,23 +108,49 @@ export const AboutContact: React.FC = () => {
               {highlights.map((highlight, index) => (
                 <div
                   key={index}
-                  className="group relative rounded-xl border border-white/10 p-6 bg-gradient-to-br from-white/5 to-white/[0.02] transition-all duration-500 hover:border-[#FFD700]/30 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(255,215,0,0.15)] overflow-hidden"
+                  className="group relative rounded-2xl border border-white/10 p-6 transition-all duration-500 hover:border-[#FFD700]/40 hover:-translate-y-1 overflow-hidden"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.05)",
+                  }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-xl" />
+                  {/* Gradient glow overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* Shimmer sweep effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: "linear-gradient(105deg, transparent 40%, rgba(255,215,0,0.08) 50%, transparent 60%)",
+                      animation: "shimmerSweep 2s ease-in-out infinite",
+                    }}
+                  />
+
+                  {/* Gold accent border on hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      boxShadow: "0 0 30px rgba(255,215,0,0.15), inset 0 0 20px rgba(255,215,0,0.03)",
+                    }}
+                  />
 
                   <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="h-10 w-10 flex-shrink-0 rounded-lg bg-[#FFD700]/10 text-[#FFD700] grid place-content-center transition-all duration-500 group-hover:bg-[#FFD700]/20 group-hover:-translate-y-1 group-hover:shadow-[0_0_15px_rgba(255,215,0,0.4)]">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div
+                        className="h-12 w-12 flex-shrink-0 rounded-xl bg-gradient-to-br from-[#FFD700]/20 to-[#FFD700]/5 text-[#FFD700] grid place-content-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] group-hover:bg-gradient-to-br group-hover:from-[#FFD700]/30 group-hover:to-[#FFD700]/10"
+                        style={{
+                          boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), 0 2px 8px rgba(0,0,0,0.3)",
+                        }}
+                      >
                         {highlight.icon}
                       </div>
-                      <div className="relative">
-                        <div className="text-base font-semibold text-white transition-all duration-300 group-hover:text-[#FFEAA7]">
+                      <div>
+                        <div className="text-lg font-semibold text-white transition-all duration-300 group-hover:text-[#FFD700]">
                           {highlight.title}
                         </div>
-                        <div className="absolute -bottom-0.5 left-0 h-[2px] w-0 bg-gradient-to-r from-[#FFD700] to-[#FFEAA7] transition-all duration-500 group-hover:w-full" />
                       </div>
                     </div>
-                    <p className="text-sm text-gray-400 leading-relaxed transition-all duration-300 group-hover:text-gray-300 group-hover:brightness-110">
+                    <p className="text-sm text-gray-400 leading-relaxed transition-all duration-300 group-hover:text-gray-300">
                       {highlight.description}
                     </p>
                   </div>
@@ -132,71 +159,160 @@ export const AboutContact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Contact Form or Calendar */}
           <div
             id="contact"
-            className="bg-white/5 border border-[#FFD700]/20 rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_#0B122199,0_0_40px_rgba(255,215,0,0.1)] backdrop-blur-lg"
+            className="relative rounded-2xl p-8 md:p-10 overflow-hidden"
+            style={{
+              background: "linear-gradient(180deg, rgba(14,16,19,0.95) 0%, rgba(11,12,16,0.98) 100%)",
+              border: "1px solid rgba(255,215,0,0.25)",
+              boxShadow: "0 0 50px rgba(255,215,0,0.1), inset 0 1px 1px rgba(255,255,255,0.05)",
+            }}
           >
+            {/* Background gradient accent */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse at top right, rgba(255,215,0,0.08) 0%, transparent 50%)",
+              }}
+            />
+
+            {/* Subtle animated glow */}
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none opacity-50"
+              style={{
+                background: "radial-gradient(circle at 30% 20%, rgba(255,215,0,0.05) 0%, transparent 40%)",
+                animation: "auraPulse 6s ease-in-out infinite",
+              }}
+            />
+
             {!showCalendar ? (
-              <div className={`transition-opacity duration-400 ${isSubmitting ? "opacity-0" : "opacity-100"}`}>
-                <h3 className="text-3xl font-semibold tracking-tight text-white">Let's grow your business.</h3>
-                <p className="mt-2 text-base text-gray-300">
+              <div
+                className={`relative z-10 transition-opacity duration-400 ${isSubmitting ? "opacity-0" : "opacity-100"}`}
+              >
+                <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">
+                  Let's grow your business.
+                </h3>
+                <p className="text-base text-gray-400 mb-8">
                   Tell us your goals and we'll send a custom plan to accelerate your growth.
                 </p>
-                <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
-                  <div>
+
+                <form className="grid gap-5" onSubmit={handleSubmit}>
+                  <div className="relative">
                     <input
                       type="text"
                       placeholder="Your name"
                       value={formData.name}
+                      onFocus={() => setFocusedField("name")}
+                      onBlur={() => setFocusedField(null)}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={`w-full rounded-md border ${
-                        errors.name ? "border-red-500" : "border-white/10"
-                      } bg-black/20 px-3.5 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700] transition caret-[#FFD700]`}
+                      className={`w-full rounded-xl border ${
+                        errors.name
+                          ? "border-red-500"
+                          : focusedField === "name"
+                            ? "border-[#FFD700]/60"
+                            : "border-white/10"
+                      } bg-black/30 px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none transition-all duration-300 caret-[#FFD700]`}
+                      style={{
+                        boxShadow:
+                          focusedField === "name"
+                            ? "0 0 20px rgba(255,215,0,0.15), inset 0 1px 2px rgba(0,0,0,0.3)"
+                            : "inset 0 1px 2px rgba(0,0,0,0.3)",
+                      }}
                     />
-                    {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
+                    {errors.name && <p className="mt-1.5 text-sm text-red-400">{errors.name}</p>}
                   </div>
-                  <div>
+
+                  <div className="relative">
                     <input
                       type="email"
                       placeholder="Email address"
                       value={formData.email}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className={`w-full rounded-md border ${
-                        errors.email ? "border-red-500" : "border-white/10"
-                      } bg-black/20 px-3.5 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700] transition caret-[#FFD700]`}
+                      className={`w-full rounded-xl border ${
+                        errors.email
+                          ? "border-red-500"
+                          : focusedField === "email"
+                            ? "border-[#FFD700]/60"
+                            : "border-white/10"
+                      } bg-black/30 px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none transition-all duration-300 caret-[#FFD700]`}
+                      style={{
+                        boxShadow:
+                          focusedField === "email"
+                            ? "0 0 20px rgba(255,215,0,0.15), inset 0 1px 2px rgba(0,0,0,0.3)"
+                            : "inset 0 1px 2px rgba(0,0,0,0.3)",
+                      }}
                     />
-                    {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
+                    {errors.email && <p className="mt-1.5 text-sm text-red-400">{errors.email}</p>}
                   </div>
+
                   <input
                     type="text"
                     placeholder="Website URL (optional)"
                     value={formData.website}
+                    onFocus={() => setFocusedField("website")}
+                    onBlur={() => setFocusedField(null)}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full rounded-md border border-white/10 bg-black/20 px-3.5 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700] transition caret-[#FFD700]"
+                    className={`w-full rounded-xl border ${focusedField === "website" ? "border-[#FFD700]/60" : "border-white/10"} bg-black/30 px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none transition-all duration-300 caret-[#FFD700]`}
+                    style={{
+                      boxShadow:
+                        focusedField === "website"
+                          ? "0 0 20px rgba(255,215,0,0.15), inset 0 1px 2px rgba(0,0,0,0.3)"
+                          : "inset 0 1px 2px rgba(0,0,0,0.3)",
+                    }}
                   />
+
                   <textarea
                     placeholder="What are you trying to achieve?"
                     rows={3}
                     value={formData.goal}
+                    onFocus={() => setFocusedField("goal")}
+                    onBlur={() => setFocusedField(null)}
                     onChange={(e) => setFormData({ ...formData, goal: e.target.value })}
-                    className="w-full rounded-md border border-white/10 bg-black/20 px-3.5 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700] transition caret-[#FFD700]"
+                    className={`w-full rounded-xl border ${focusedField === "goal" ? "border-[#FFD700]/60" : "border-white/10"} bg-black/30 px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none transition-all duration-300 caret-[#FFD700] resize-none`}
+                    style={{
+                      boxShadow:
+                        focusedField === "goal"
+                          ? "0 0 20px rgba(255,215,0,0.15), inset 0 1px 2px rgba(0,0,0,0.3)"
+                          : "inset 0 1px 2px rgba(0,0,0,0.3)",
+                    }}
                   ></textarea>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#FFD700] text-gray-900 text-base font-semibold px-4 py-3 hover:bg-amber-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 transition-all transform-gpu hover:-translate-y-0.5 shadow-[0_0_15px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FFD700] to-[#FFC000] text-gray-900 text-base font-bold px-6 py-4 overflow-hidden group transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{
+                      boxShadow: "0 0 25px rgba(255,215,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow =
+                        "0 0 40px rgba(255,215,0,0.6), inset 0 1px 1px rgba(255,255,255,0.3)"
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow =
+                        "0 0 25px rgba(255,215,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3)"
+                    }}
                   >
-                    <Icons.Send className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
-                    <span className="transition-colors duration-300 delay-50">
-                      {isSubmitting ? "Submitting..." : "Design My Growth Path"}
-                    </span>
+                    {/* Shimmer sweep */}
+                    <span
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%)",
+                        animation: "shimmerSweep 3s ease-in-out infinite",
+                      }}
+                    />
+                    <Icons.Send className="w-4 h-4 transition-transform duration-300 group-hover:scale-110 relative z-10" />
+                    <span className="relative z-10">{isSubmitting ? "Submitting..." : "Design My Growth Path"}</span>
                   </button>
-                  <p className="text-center text-sm text-gray-500">
+
+                  <p className="text-center text-sm text-gray-500 mt-2">
                     Or email us directly at{" "}
                     <a
                       href="mailto:dominionmarketing1s@gmail.com"
-                      className="text-gray-400 hover:text-[#FFD700] underline underline-offset-2"
+                      className="text-gray-400 hover:text-[#FFD700] underline underline-offset-2 transition-colors duration-300"
                     >
                       dominionmarketing1s@gmail.com
                     </a>
@@ -204,14 +320,12 @@ export const AboutContact: React.FC = () => {
                 </form>
               </div>
             ) : (
-              <div className="animate-[fadeIn_0.4s_ease-in-out]">
-                <h3 className="text-2xl font-semibold tracking-tight text-white mb-4">
-                  Schedule Your Free Growth Call
-                </h3>
-                <p className="text-base text-gray-300 mb-6">
+              <div className="relative z-10 animate-[fadeIn_0.4s_ease-in-out]">
+                <h3 className="text-2xl font-bold tracking-tight text-white mb-4">Schedule Your Free Growth Call</h3>
+                <p className="text-base text-gray-400 mb-6">
                   Pick a time that works best for you. We'll discuss your goals and create a custom growth strategy.
                 </p>
-                <div className="rounded-lg overflow-hidden border border-[#FFD700]/20">
+                <div className="rounded-xl overflow-hidden border border-[#FFD700]/20">
                   <iframe
                     src={calUrl}
                     width="100%"
