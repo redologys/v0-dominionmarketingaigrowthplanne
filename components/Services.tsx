@@ -6,12 +6,14 @@ const services = [
   {
     title: "Market and Competitor Intelligence",
     subtitle: "Business Insight Analysis",
+    question: "What makes a brand identity powerful?",
     description: "Gain clarity on how competitors attract customers and find opportunities to outperform them.",
     features: ["Competitor performance insights", "Search and demand trends", "Growth opportunities ready for capture"],
   },
   {
     title: "Growth Strategy and SEO",
     subtitle: "Strategic Growth Blueprint",
+    question: "Does your website reflect who you want to be known for?",
     description:
       "A data driven plan that increases visibility, strengthens your brand, and drives consistent customer flow.",
     features: ["Complete SEO optimization", "Growth across search platforms", "Targeting based on real behavior"],
@@ -19,6 +21,7 @@ const services = [
   {
     title: "Brand and Content Engine",
     subtitle: "Digital Presence and Content Advantage",
+    question: "How do people actually see your business online?",
     description: "We elevate your online presence with design and content that builds trust and drives action.",
     features: [
       "High performing website or redesign",
@@ -29,6 +32,7 @@ const services = [
   {
     title: "Paid Marketing and Visibility Systems",
     subtitle: "Performance Advertising and Presence Boost",
+    question: "Why isn't your business showing up where customers look?",
     description: "Ad campaigns built for measurable results and stronger visibility across every platform.",
     features: [
       "Profile setup and optimization",
@@ -80,6 +84,10 @@ export const Services: React.FC = () => {
                 <h3 className="text-xl font-bold tracking-tight text-white mb-2 group-hover:text-[#FFD700]/90 transition-colors duration-300">
                   {service.title}
                 </h3>
+                <p className="text-xs font-medium text-[#FFD700]/60 italic mb-3 leading-relaxed">
+                  "{service.question}"
+                </p>
+
                 <p className="text-sm font-medium text-[#FFD700]/80 tracking-wide mb-5">{service.subtitle}</p>
 
                 <p className="text-sm text-gray-400 leading-relaxed mb-6 group-hover:text-gray-300 transition-colors duration-300">

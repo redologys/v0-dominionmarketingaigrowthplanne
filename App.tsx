@@ -3,6 +3,7 @@ import { Hero } from "./components/Hero"
 import { BusinessScore } from "./components/BusinessScore"
 import { Services } from "./components/Services"
 import { Work } from "./components/Work"
+import { FAQSection } from "./components/FAQSection"
 import { Pricing } from "./components/Pricing"
 import { AboutContact } from "./components/AboutContact"
 import { Footer } from "./components/Footer"
@@ -28,6 +29,10 @@ function App() {
         <AnimatedDivider />
         <Section>
           <Work />
+        </Section>
+        <AnimatedDivider />
+        <Section>
+          <FAQSection />
         </Section>
         <AnimatedDivider />
         <Section>

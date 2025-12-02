@@ -40,6 +40,7 @@ import {
   Bot,
   Facebook,
   Mail,
+  ChevronDown,
 } from "lucide-react"
 
 const iconProps: LucideProps = {
@@ -87,4 +88,5 @@ export const Icons = {
   Bot: (props: LucideProps) => <Bot {...iconProps} {...props} />,
   Facebook: (props: LucideProps) => <Facebook {...iconProps} {...props} />,
   Mail: (props: LucideProps) => <Mail {...iconProps} {...props} />,
+  ChevronDown: (props: LucideProps) => <ChevronDown {...iconProps} {...props} />,
 }

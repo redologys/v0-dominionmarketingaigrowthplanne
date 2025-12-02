@@ -121,6 +121,13 @@ export const Hero: React.FC = () => {
             results, and no wasted ad spend.
           </p>
 
+          <p
+            className="max-w-2xl text-sm sm:text-base font-normal mt-3 mx-auto font-sans leading-[1.5] text-[#FFD700]/70 animate-fade-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            Brand identity, website performance, and online presence engineered for measurable growth.
+          </p>
+
           <div className="mt-8 flex items-center justify-center animate-fade-up" style={{ animationDelay: "0.4s" }}>
             <a
               href="#score"
