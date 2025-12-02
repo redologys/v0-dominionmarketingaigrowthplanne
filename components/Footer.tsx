@@ -1,8 +1,12 @@
+"use client"
+
 import type React from "react"
+import { useState } from "react"
 import { Icons } from "./icons"
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
+  const [showEmailPopup, setShowEmailPopup] = useState(false)
 
   return (
     <footer className="bg-gradient-to-b from-[#0B1221] to-[#080C14] relative overflow-hidden pt-20 pb-12 px-6 sm:px-8 lg:px-12">
@@ -68,6 +72,17 @@ export const Footer: React.FC = () => {
             <h3 className="text-base font-semibold text-white tracking-wider mb-5">Follow Us</h3>
             <div className="flex items-center gap-4">
               <a
+                href="https://www.facebook.com/profile.php?id=61584264459550"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="relative p-3 rounded-xl bg-white/[0.03] border border-white/10 text-gray-400 hover:text-[#FFD700] hover:border-[#FFD700]/30 hover:shadow-[0_0_20px_rgba(255,215,0,0.15)] transition-all duration-300 group"
+              >
+                <Icons.Facebook className="w-5 h-5 relative z-10" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FFD700]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </a>
+
+              <a
                 href="https://www.instagram.com/dominion.marketing"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -77,15 +92,15 @@ export const Footer: React.FC = () => {
                 <Icons.Instagram className="w-5 h-5 relative z-10" />
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FFD700]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
-            </div>
 
-            <div className="mt-6">
-              <a
-                href="mailto:dominionmarketing1s@gmail.com"
-                className="text-sm text-gray-500 hover:text-[#FFD700] transition-colors duration-300"
+              <button
+                onClick={() => setShowEmailPopup(true)}
+                aria-label="Email"
+                className="relative p-3 rounded-xl bg-white/[0.03] border border-white/10 text-gray-400 hover:text-[#FFD700] hover:border-[#FFD700]/30 hover:shadow-[0_0_20px_rgba(255,215,0,0.15)] transition-all duration-300 group"
               >
-                dominionmarketing1s@gmail.com
-              </a>
+                <Icons.Mail className="w-5 h-5 relative z-10" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FFD700]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </button>
             </div>
           </div>
         </div>
@@ -107,6 +122,64 @@ export const Footer: React.FC = () => {
           animation: "bottom-line-shimmer 8s linear infinite",
         }}
       ></div>
+
+      {showEmailPopup && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onClick={() => setShowEmailPopup(false)}
+        >
+          <div
+            className="relative bg-gradient-to-br from-[#0F1629] to-[#0B1221] border border-white/10 rounded-2xl p-8 max-w-md mx-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setShowEmailPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <Icons.X className="w-5 h-5" />
+            </button>
+
+            {/* Email icon */}
+            <div className="flex justify-center mb-6">
+              <div className="relative p-4 rounded-full bg-gradient-to-br from-[#FFD700]/20 to-[#FFD700]/5 border border-[#FFD700]/30">
+                <Icons.Mail className="w-8 h-8 text-[#FFD700]" />
+                <div className="absolute inset-0 rounded-full animate-ping bg-[#FFD700]/10"></div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <h3 className="text-xl font-semibold text-white text-center mb-2">Get in Touch</h3>
+            <p className="text-gray-400 text-center mb-6">
+              Send us an email and we'll get back to you within 24 hours.
+            </p>
+
+            {/* Email display */}
+            <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 mb-6">
+              <p className="text-[#FFD700] text-center font-medium select-all">dominionmarketing1s@gmail.com</p>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText("dominionmarketing1s@gmail.com")
+                  setShowEmailPopup(false)
+                }}
+                className="flex-1 py-3 px-4 rounded-xl bg-white/[0.05] border border-white/10 text-white hover:bg-white/10 transition-all duration-300"
+              >
+                Copy Email
+              </button>
+              <a
+                href="mailto:dominionmarketing1s@gmail.com"
+                className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-black font-semibold text-center hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all duration-300"
+              >
+                Open Mail App
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   )
 }

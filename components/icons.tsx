@@ -16,6 +16,7 @@ import {
   PenTool,
   MapPin,
   BarChart3,
+  BarChart,
   Check,
   CheckCircle,
   Handshake,
@@ -37,6 +38,8 @@ import {
   Info,
   MessageCircle,
   Bot,
+  Facebook,
+  Mail,
 } from "lucide-react"
 
 const iconProps: LucideProps = {
@@ -60,6 +63,7 @@ export const Icons = {
   PenTool: (props: LucideProps) => <PenTool {...iconProps} {...props} />,
   MapPin: (props: LucideProps) => <MapPin {...iconProps} {...props} />,
   BarChart3: (props: LucideProps) => <BarChart3 {...iconProps} {...props} />,
+  BarChart: (props: LucideProps) => <BarChart {...iconProps} {...props} />,
   Check: (props: LucideProps) => <Check {...iconProps} {...props} />,
   CheckCircle: (props: LucideProps) => <CheckCircle {...iconProps} {...props} />,
   Handshake: (props: LucideProps) => <Handshake {...iconProps} {...props} />,
@@ -81,4 +85,6 @@ export const Icons = {
   Info: (props: LucideProps) => <Info {...iconProps} {...props} />,
   MessageCircle: (props: LucideProps) => <MessageCircle {...iconProps} {...props} />,
   Bot: (props: LucideProps) => <Bot {...iconProps} {...props} />,
+  Facebook: (props: LucideProps) => <Facebook {...iconProps} {...props} />,
+  Mail: (props: LucideProps) => <Mail {...iconProps} {...props} />,
 }
